@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+  
+    <h1>Task 1</h1>
+
+    <p>Введіть рядок для обробки:</p>
+    <textarea id="inputString" rows="4" cols="50"></textarea>
+    <br><br>
+    <button onclick="processString()">Обробити</button>
+
+    <div id="result">
+        <p>Модифікований рядок:</p>
+        <p id="modifiedString"></p>
+        <p>Кількість пар 'BC': <span id="bcCount"></span></p>
+    </div>
+
+    <script>
+        function processString() {
+            let input = document.getElementById('inputString').value;
+
+            // Видаляємо всі символи 'A' після кожної коми
+            let modifiedString = input.replace(/,(.*?)(A+)/g, (match, p1, p2) => `,${p1}${p2.replace(/A/g, '')}`);
+
+            // Підраховуємо кількість пар 'BC'
+            let countBC = (modifiedString.match(/BC/g) || []).length;
+
+            // Виводимо результат
+            document.getElementById('modifiedString').innerText = modifiedString;
+            document.getElementById('bcCount').innerText = countBC;
+        }
+    </script>
+
+</body>
+</html>

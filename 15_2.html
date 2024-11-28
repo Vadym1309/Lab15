@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task 2</h1>
+
+    <p>Введіть рядок для обробки:</p>
+    <textarea id="inputString" rows="4" cols="50"></textarea>
+    <br><br>
+    <button onclick="processString()">Обробити</button>
+
+    <div id="result">
+        <p>Кількість слів, що містять літеру 'і': <span id="countI"></span></p>
+        <p>Модифікований рядок з поміняними місцями першим і другим словом:</p>
+        <p id="modifiedString"></p>
+    </div>
+
+    <script>
+        function processString() {
+            let input = document.getElementById('inputString').value;
+
+            // Розбиваємо рядок на слова
+            let words = input.split(/\s+/);
+            
+            // Підраховуємо кількість слів, що містять літеру 'і'
+            let countI = words.filter(word => word.includes('і')).length;
+
+            // Міняємо місцями перше і друге слово
+            if (words.length > 1) {
+                [words[0], words[1]] = [words[1], words[0]];
+            }
+
+            // Перетворюємо слова назад в рядок
+            let modifiedString = words.join(' ');
+
+            // Виводимо результат
+            document.getElementById('countI').innerText = countI;
+            document.getElementById('modifiedString').innerText = modifiedString;
+        }
+    </script>
+
+</body>
+</html>

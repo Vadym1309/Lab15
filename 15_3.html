@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task 3</h1>
+
+    <p>Введіть рядок для шифрування:</p>
+    <textarea id="inputString" rows="4" cols="50"></textarea>
+    <br><br>
+    <button onclick="encryptString()">Зашифрувати</button>
+
+    <div id="result">
+        <p>Зашифрований рядок:</p>
+        <p id="encryptedString"></p>
+    </div>
+
+    <script>
+        function encryptString() {
+            let input = document.getElementById('inputString').value;
+            let encrypted = '';
+
+            // Український алфавіт (маленькі та великі літери)
+            const alphabetLower = 'а б в г д е є ж з и і ї й к л м н о п р с т у ф х ц ч ш щ ю я'.split(' ');
+            const alphabetUpper = 'А Б В Г Д Е Є Ж З И І Ї Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ю Я'.split(' ');
+
+            for (let i = 0; i < input.length; i++) {
+                let char = input[i];
+
+                // Шифруємо маленькі літери
+                if (alphabetLower.includes(char)) {
+                    let index = alphabetLower.indexOf(char);
+                    encrypted += index === alphabetLower.length - 1 ? alphabetLower[0] : alphabetLower[index + 1];
+                }
+                // Шифруємо великі літери
+                else if (alphabetUpper.includes(char)) {
+                    let index = alphabetUpper.indexOf(char);
+                    encrypted += index === alphabetUpper.length - 1 ? alphabetUpper[0] : alphabetUpper[index + 1];
+                }
+                else {
+                    // Якщо символ не літера, додаємо його без змін
+                    encrypted += char;
+                }
+            }
+
+            // Виводимо результат
+            document.getElementById('encryptedString').innerText = encrypted;
+        }
+    </script>
+
+</body>
+</html>

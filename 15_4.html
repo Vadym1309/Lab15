@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Task 4</h1>
+
+    <p>Введіть рядок для шифрування:</p>
+    <textarea id="inputString" rows="4" cols="50"></textarea>
+    <br><br>
+    <button onclick="encryptString()">Зашифрувати</button>
+
+    <div id="result">
+        <p>Зашифрований рядок:</p>
+        <p id="encryptedString"></p>
+    </div>
+
+    <script>
+        function shuffleWord(word) {
+            if (word.length <= 2) {
+                return word; // Якщо слово складається з 2 або менше букв, повертаємо його без змін
+            }
+
+            // Беремо першу та останню букву
+            let firstLetter = word[0];
+            let lastLetter = word[word.length - 1];
+
+            // Витягуємо середину слова
+            let middle = word.slice(1, word.length - 1);
+
+            // Перемішуємо середину слова
+            middle = middle.split('').sort(() => Math.random() - 0.5).join('');
+
+            // Повертаємо слово з перемішаними літерами
+            return firstLetter + middle + lastLetter;
+        }
+
+        function encryptString() {
+            let input = document.getElementById('inputString').value;
+            
+            // Розбиваємо рядок на слова
+            let words = input.split(/\s+/);
+
+            // Перемішуємо букви в кожному слові
+            let encryptedWords = words.map(word => shuffleWord(word));
+
+            // Перетворюємо масив слів назад в рядок
+            let encryptedString = encryptedWords.join(' ');
+
+            // Виводимо результат
+            document.getElementById('encryptedString').innerText = encryptedString;
+        }
+    </script>
+
+</body>
+</html>
